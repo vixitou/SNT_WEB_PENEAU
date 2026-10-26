@@ -34,16 +34,34 @@
   </main>
 
   <script>
-    const expectedPassword = "webRenaudeau";
-    const expectedPassword2 = "webRenaudeau2";
-    const expectedPassword3 = "webRenaudeau3";
-    const expectedPassword4 = "webRenaudeau4";
-    const expectedPassword5 = "webRenaudeau5";
+    
 
     function verifierMotDePasse() {
       const enteredPassword = document.getElementById("password").value;
 
-      if (enteredPassword === expectedPassword4) {
+      if (enteredPassword === "mdpSNT") {
+        document.getElementById("password-exercise").innerHTML =
+          '<div class="reward-card">' +
+          '<h2>Félicitations !</h2>' +
+          '<img class="reward-image" src="recompense.svg" alt="">' +
+          '<p>Tu as gagné <strong>1 point</strong> sur ton évaluation ! explique au professeur comment tu as fait pour récupérer le point</p>' +
+          '</div>';
+        return;
+      }
+
+      document.getElementById("password-error").innerHTML =
+        "Ce n’est pas le bon mot de passe. Réessaie ! (f12) ou clique droit puis inspecter pour voir le code source html de la page et trouver le mot de passe";
+      document.getElementById("password-error").hidden = false;
+    }
+     function verifierMotDePasse2() {
+      const enteredPassword = document.getElementById("password").value;
+      const variableTexte1 = "webRenaudeau";
+      const variableTexte2 = "webRenaudeau2";
+      const variableTexte3 = "webRenaudeau3";
+      const variableTexte4 = "webRenaudeau4";
+      const variableTexte5 = "webRenaudeau5";
+
+      if (enteredPassword === variableTexte3) {
         document.getElementById("password-exercise").innerHTML =
           '<div class="reward-card">' +
           '<h2>Félicitations !</h2>' +
