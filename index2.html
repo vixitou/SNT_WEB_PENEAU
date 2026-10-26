@@ -88,16 +88,8 @@
   </main>
 
   <script>
-    const documentPath = new URL("Document/Activité1 - Généralités.docx", window.location.href).href;
     const viewer = document.querySelector("#document-viewer");
-    const message = document.querySelector("#viewer-message");
-
-    if (window.location.protocol === "http:" || window.location.protocol === "https:") {
-      viewer.src = "https://docs.google.com/gview?embedded=1&url=" + encodeURIComponent(documentPath);
-    } else {
-      viewer.hidden = true;
-      message.style.display = "block";
-    }
+    viewer.src = "Document/Activité1 - Généralités.pdf#toolbar=1&navpanes=0";
   </script>
 </body>
 </html>
