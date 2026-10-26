@@ -19,27 +19,18 @@
         Examine le code de cette page pour découvrir le mot de passe, puis saisis-le
         pour afficher la récompense.
       </p>
-      <form id="password-form" class="password-form">
+      <div class="password-form">
         <label for="password">Mot de passe</label>
         <div class="password-entry">
-          <input id="password" name="password" type="password" autocomplete="off" required>
-          <button type="submit">Valider</button>
+          <input id="password" name="password" type="password" autocomplete="off">
+          <button type="button" onclick="verifierMotDePasse()">Valider</button>
         </div>
         <p id="password-error" class="password-error" role="alert" hidden>
           Ce n’est pas le bon mot de passe. Réessaie !
         </p>
-      </form>
+      </div>
     </section>
 
-    <section id="reward-message" class="reward-card" aria-labelledby="reward-title" aria-live="polite" hidden>
-      <h2 id="reward-title">Félicitations !</h2>
-      <img
-        class="reward-image"
-        src="recompense.svg"
-        alt=""
-      >
-      <p>Tu as gagné <strong>1 point</strong> sur ton évaluation ! explique au professeur comment tu as fait pour récupérer le point</p>
-    </section>
   </main>
 
   <script>
@@ -49,18 +40,23 @@
     const expectedPassword4 = "webRenaudeau4";
     const expectedPassword5 = "webRenaudeau5";
 
-    document.querySelector("#password-form").addEventListener("submit", (event) => {
-      event.preventDefault();
-      const enteredPassword = document.querySelector("#password").value;
+    function verifierMotDePasse() {
+      const enteredPassword = document.getElementById("password").value;
 
       if (enteredPassword === expectedPassword4) {
-        document.querySelector("#password-exercise").hidden = true;
-        document.querySelector("#reward-message").hidden = false;
+        document.getElementById("password-exercise").innerHTML =
+          '<div class="reward-card">' +
+          '<h2>Félicitations !</h2>' +
+          '<img class="reward-image" src="recompense.svg" alt="">' +
+          '<p>Tu as gagné <strong>1 point</strong> sur ton évaluation ! explique au professeur comment tu as fait pour récupérer le point</p>' +
+          '</div>';
         return;
       }
 
-      document.querySelector("#password-error").hidden = false;
-    });
+      document.getElementById("password-error").innerHTML =
+        "Ce n’est pas le bon mot de passe. Réessaie !";
+      document.getElementById("password-error").hidden = false;
+    }
   </script>
 </body>
 </html>
