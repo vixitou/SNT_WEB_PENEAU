@@ -13,86 +13,54 @@
   </header>
 
   <main>
-    <section aria-labelledby="video-title">
-      <h2 id="video-title">Vidéo</h2>
-      <div class="video">
-        <a href="https://www.youtube.com/watch?v=aX3z3JoVEdE" target="_blank" rel="noopener noreferrer">
-            https://www.youtube.com/watch?v=aX3z3JoVEdE
-        </a>
-      </div>
+    <section id="password-exercise" aria-labelledby="password-exercise-title">
+      <h2 id="password-exercise-title">Défi — trouver le mot de passe</h2>
+      <p>
+        Examine le code de cette page pour découvrir le mot de passe, puis saisis-le
+        pour afficher la récompense.
+      </p>
+      <form id="password-form" class="password-form">
+        <label for="password">Mot de passe</label>
+        <div class="password-entry">
+          <input id="password" name="password" type="password" autocomplete="off" required>
+          <button type="submit">Valider</button>
+        </div>
+        <p id="password-error" class="password-error" role="alert" hidden>
+          Ce n’est pas le bon mot de passe. Réessaie !
+        </p>
+      </form>
     </section>
 
-    <section aria-labelledby="questions-title">
-      <h2 id="questions-title">Questions — Le Web et le protocole IP</h2>
-      <ol class="questions">
-        <li>Quel est le rôle du navigateur lorsque tu ouvres ton site web ?</li>
-        <li>À quoi sert une adresse IP sur Internet ?</li>
-        <li>Lorsque tu consultes ton site publié sur Internet, comment ton ordinateur trouve-t-il le serveur qui héberge ton site ?</li>
-        <li>Quelle est la différence entre ouvrir ton fichier <code>index.html</code> sur ton ordinateur et consulter un site publié sur Internet ?</li>
-      </ol>
-    </section>
-
-    <section aria-labelledby="url-title">
-      <h2 id="url-title">La composition d’une URL</h2>
-      <p>L’adresse suivante est l’URL d’une page d’un site :</p>
-      <div class="url-example">http://www.monsite.com/chemin/vers/fichier.html</div>
-
-      <div class="parts">
-        <article class="part">
-          <strong>1. Le protocole</strong>
-          <p>Généralement HTTP ou sa version sécurisée HTTPS. Le protocole indique la façon dont le navigateur échange les données avec le serveur.</p>
-        </article>
-        <article class="part">
-          <strong>2. Le nom de domaine</strong>
-          <p><code>www.monsite.com</code> désigne le serveur Web auquel le navigateur s’adresse.</p>
-        </article>
-        <article class="part">
-          <strong>3. Le chemin d’accès</strong>
-          <p><code>/chemin/vers/</code> indique l’emplacement de la ressource dans les dossiers du serveur.</p>
-        </article>
-        <article class="part">
-          <strong>4. Le nom du fichier</strong>
-          <p><code>fichier.html</code> est la ressource visée. Des informations optionnelles peuvent suivre un point d’interrogation.</p>
-        </article>
-      </div>
-
-      <p class="note"><strong>À retenir :</strong> le protocole est toujours suivi des signes <code>://</code>. Les différents éléments de l’adresse sont ensuite séparés par une barre oblique <code>/</code>.</p>
-    </section>
-
-    <section aria-labelledby="exercise-title">
-      <h2 id="exercise-title">Question 3 — Identifier les URL</h2>
-      <table class="url-table">
-        <thead>
-          <tr>
-            <th>URL</th>
-            <th>Composition</th>
-            <th>Adresse sécurisée ?</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>https://www.larousse.fr/dictionnaires/anglais-francais/request</code></td>
-            <td>
-              <strong>Protocole :</strong> HTTPS<br>
-              <strong>Nom de domaine :</strong> www.larousse.fr<br>
-              <strong>Chemin :</strong> /dictionnaires/anglais-francais/<br>
-              <strong>Ressource :</strong> request
-            </td>
-            <td><span class="secure">Oui, HTTPS est sécurisée.</span></td>
-          </tr>
-          <tr>
-            <td><code>http://www.youtube.com/watch?v=yYq3rH467kw</code></td>
-            <td>
-              <strong>Protocole :</strong> HTTP<br>
-              <strong>Nom de domaine :</strong> www.youtube.com<br>
-              <strong>Chemin :</strong> /watch<br>
-              <strong>Paramètre :</strong> v = yYq3rH467kw
-            </td>
-            <td><span class="not-secure">Non, HTTP n’est pas sécurisée.</span></td>
-          </tr>
-        </tbody>
-      </table>
+    <section id="reward-message" class="reward-card" aria-labelledby="reward-title" aria-live="polite" hidden>
+      <h2 id="reward-title">Félicitations !</h2>
+      <img
+        class="reward-image"
+        src="recompense.svg"
+        alt=""
+      >
+      <p>Tu as gagné <strong>1 point</strong> sur ton évaluation ! explique au professeur comment tu as fait pour récupérer le point</p>
     </section>
   </main>
+
+  <script>
+    const expectedPassword = "webRenaudeau";
+    const expectedPassword2 = "webRenaudeau2";
+    const expectedPassword3 = "webRenaudeau3";
+    const expectedPassword4 = "webRenaudeau4";
+    const expectedPassword5 = "webRenaudeau5";
+
+    document.querySelector("#password-form").addEventListener("submit", (event) => {
+      event.preventDefault();
+      const enteredPassword = document.querySelector("#password").value;
+
+      if (enteredPassword === expectedPassword4) {
+        document.querySelector("#password-exercise").hidden = true;
+        document.querySelector("#reward-message").hidden = false;
+        return;
+      }
+
+      document.querySelector("#password-error").hidden = false;
+    });
+  </script>
 </body>
 </html>

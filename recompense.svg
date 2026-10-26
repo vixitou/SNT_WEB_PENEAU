@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 280" role="img" aria-labelledby="title description">
+  <title id="title">Médaille de récompense</title>
+  <desc id="description">Une médaille dorée avec une étoile et le texte Bravo, 1 point gagné.</desc>
+  <path d="M92 25h42l16 83-30-20-30 20z" fill="#165dff"/>
+  <path d="M166 25h42l-2 83-30-20-30 20z" fill="#567ff0"/>
+  <circle cx="150" cy="125" r="78" fill="#f6c445" stroke="#d69e16" stroke-width="8"/>
+  <circle cx="150" cy="125" r="61" fill="#fff7df" stroke="#fff" stroke-width="5"/>
+  <path d="m150 78 14 28 31 4-22 21 6 31-29-15-28 15 5-31-22-21 31-4z" fill="#f6c445" stroke="#d69e16" stroke-width="3" stroke-linejoin="round"/>
+  <text x="150" y="224" fill="#172033" font-family="Arial, sans-serif" font-size="24" font-weight="700" text-anchor="middle">BRAVO !</text>
+  <text x="150" y="253" fill="#147d64" font-family="Arial, sans-serif" font-size="18" font-weight="700" text-anchor="middle">1 POINT GAGNÉ</text>
+</svg>
