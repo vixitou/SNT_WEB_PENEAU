@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Activité 1 - Généralités</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: Arial, Helvetica, sans-serif;
+      color: #172033;
+      background: #eef1f6;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      height: 72px;
+      padding: 0 24px;
+      background: white;
+      border-bottom: 1px solid #dce2ec;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(1.15rem, 3vw, 1.6rem);
+    }
+
+    .download {
+      flex: 0 0 auto;
+      padding: 9px 14px;
+      color: white;
+      text-decoration: none;
+      background: #165dff;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+
+    main {
+      height: calc(100vh - 72px);
+      padding: 16px;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: 1px solid #dce2ec;
+      border-radius: 6px;
+      background: white;
+    }
+
+    .message {
+      display: none;
+      max-width: 720px;
+      margin: 20px auto;
+      padding: 18px;
+      background: white;
+      border-left: 4px solid #165dff;
+    }
+
+    @media (max-width: 600px) {
+      header { height: auto; padding-block: 12px; }
+      main { height: 80vh; padding: 8px; }
+      h1 { line-height: 1.2; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Activité 1 - Généralités</h1>
+    <a class="download" href="Document/Activité1%20-%20Généralités.docx" download>Télécharger</a>
+  </header>
+
+  <main>
+    <iframe id="document-viewer" title="Activité 1 - Généralités"></iframe>
+    <p id="viewer-message" class="message">
+      La prévisualisation n’est pas disponible localement. Utilisez le bouton « Télécharger » pour ouvrir le document dans LibreOffice.
+    </p>
+  </main>
+
+  <script>
+    const documentPath = new URL("Document/Activité1 - Généralités.docx", window.location.href).href;
+    const viewer = document.querySelector("#document-viewer");
+    const message = document.querySelector("#viewer-message");
+
+    if (window.location.protocol === "http:" || window.location.protocol === "https:") {
+      viewer.src = "https://docs.google.com/gview?embedded=1&url=" + encodeURIComponent(documentPath);
+    } else {
+      viewer.hidden = true;
+      message.style.display = "block";
+    }
+  </script>
+</body>
+</html>
