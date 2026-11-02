@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Défis embarqués</title>
+<style>
+:root {
+ --site-primary:#2457D6; --site-secondary:#DCE8FF; --site-background:#F4F7FC;
+ --site-on-primary:#FFFFFF; --site-on-secondary:#18356E; --site-on-background:#17233B;
+ --site-font-body:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+ --site-font-heading:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+ --site-heading-scale:1; --site-spacing-scale:1; --site-radius-scale:1; --site-decoration-opacity:1;
+ color-scheme:light dark;
+}
+*{box-sizing:border-box} body{margin:0;background:light-dark(#f4f7fc,#101522);color:light-dark(#17233b,#edf2ff);font-family:var(--site-font-body)}
+#app{min-height:100vh;width:100%;background-color:var(--site-background);color:var(--site-on-background);background:light-dark(#f4f7fc,#101522)}
+header{background:var(--site-primary);color:var(--site-on-primary);padding:calc(28px * var(--site-spacing-scale)) max(22px,calc((100vw - 1180px)/2));}
+.topline{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}.brand{font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;opacity:.88}.progress-pill{border:1px solid #ffffff66;border-radius:99px;padding:8px 12px;font-size:13px;font-weight:700}.hero{max-width:1180px;margin:28px auto 0}.hero h1{font-family:var(--site-font-heading);font-size:calc(42px * var(--site-heading-scale));line-height:1.04;letter-spacing:-.04em;margin:0 0 12px}.hero p{max-width:660px;line-height:1.6;margin:0;color:#e2eaff}
+main{max-width:1180px;margin:0 auto;padding:26px 22px 54px}.layout{display:grid;grid-template-columns:280px minmax(0,1fr);gap:22px}.panel,.mission,.sim-card{background:light-dark(#fff,#1a2233);border:1px solid light-dark(#dce4f1,#303b50);border-radius:calc(18px * var(--site-radius-scale));box-shadow:0 8px 24px #17233b0a}.panel{padding:18px;height:max-content}.section-label{font-size:11px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:light-dark(#66738c,#a4b2ce);margin-bottom:12px}.mission-list{display:grid;gap:8px}.mission-btn{width:100%;display:flex;gap:11px;align-items:center;text-align:left;border:1px solid transparent;background:transparent;border-radius:12px;padding:12px;color:inherit;cursor:pointer;font:inherit}.mission-btn:hover{background:light-dark(#f0f4fc,#242f44)}.mission-btn.active{background:var(--site-secondary);color:var(--site-on-secondary);border-color:light-dark(#b8ccff,#4968a4)}.mission-btn .num{display:grid;place-items:center;min-width:34px;height:34px;border-radius:10px;background:light-dark(#edf1f8,#303b50);font-weight:900}.mission-btn.active .num{background:var(--site-primary);color:white}.mission-btn strong{display:block;font-size:14px}.mission-btn small{display:block;margin-top:3px;opacity:.75;font-size:12px}.side-note{margin-top:20px;padding:14px;border-radius:12px;background:light-dark(#f3f6fc,#222d42);font-size:13px;line-height:1.55}.maincol{display:grid;gap:18px;min-width:0}.mission{padding:24px}.eyebrow{display:flex;align-items:center;gap:8px;color:var(--site-primary);font-weight:900;font-size:12px;text-transform:uppercase;letter-spacing:.1em}.mission h2{font-size:clamp(25px,3vw,34px);letter-spacing:-.03em;margin:10px 0}.mission p{line-height:1.65;margin:0 0 16px;color:light-dark(#526079,#bac5da)}.goal{padding:14px 16px;background:var(--site-secondary);color:var(--site-on-secondary);border-radius:12px;line-height:1.5;font-size:14px}.goal strong{display:block;margin-bottom:3px}.sim-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.sim-card{padding:20px;min-width:0}.sim-card h3{font-size:17px;margin:0 0 5px}.sub{font-size:13px;color:light-dark(#66738c,#a4b2ce);margin:0 0 18px;line-height:1.5}.sensor-value{display:flex;align-items:baseline;gap:8px;margin:10px 0}.sensor-value strong{font-size:38px;letter-spacing:-.04em;font-variant-numeric:tabular-nums}.sensor-value span{color:light-dark(#66738c,#a4b2ce);font-size:14px}.range-row{display:flex;justify-content:space-between;font-size:12px;color:light-dark(#66738c,#a4b2ce);margin-bottom:6px}.range{width:100%;accent-color:var(--site-primary);cursor:pointer}.ticks{display:flex;justify-content:space-between;font-size:11px;color:light-dark(#7c879c,#a4b2ce);margin-top:4px}.sensor-desc{font-size:13px;margin-top:13px;padding:10px 12px;background:light-dark(#f3f6fc,#222d42);border-radius:10px;line-height:1.45}.actuators{display:grid;gap:10px}.actuator{display:flex;align-items:center;gap:12px;padding:12px;border:1px solid light-dark(#e0e6f0,#354056);border-radius:12px}.act-icon{width:42px;height:42px;display:grid;place-items:center;border-radius:12px;background:light-dark(#f0f3f9,#293449);font-size:22px}.act-text{flex:1;min-width:0}.act-text strong{display:block;font-size:14px}.act-text small{display:block;margin-top:4px;color:light-dark(#66738c,#a4b2ce);font-size:12px}.status{font-size:11px;font-weight:900;letter-spacing:.06em;padding:6px 9px;border-radius:99px;background:light-dark(#e9edf4,#303b50);color:light-dark(#68758a,#c3cde0)}.status.on{background:#d9f8e8;color:#146b43}.lamp{width:14px;height:14px;border-radius:50%;background:#7b879b;display:inline-block;box-shadow:0 0 0 4px #7b879b20}.lamp.on{background:#20b86b;box-shadow:0 0 0 4px #20b86b24}.rulebox{padding:15px;background:light-dark(#f5f7fb,#202a3d);border-radius:12px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:13px;line-height:1.8;white-space:pre-wrap;overflow-wrap:anywhere}.rulebox .kw{color:#6e83e8;font-weight:800}.rulebox .comment{color:light-dark(#75829a,#9caac4)}.bottom-row{display:grid;grid-template-columns:1fr 1fr;gap:18px}.feedback{padding:15px 16px;border-radius:12px;background:light-dark(#eef8f2,#173427);color:light-dark(#1a6742,#9ae6bd);font-size:14px;line-height:1.55}.feedback.bad{background:light-dark(#fff2e8,#39271d);color:light-dark(#8c4718,#ffc38d)}.btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:17px}.btn{border:0;border-radius:11px;padding:11px 15px;font:inherit;font-weight:800;font-size:13px;cursor:pointer}.btn.primary{background:var(--site-primary);color:white}.btn.secondary{background:light-dark(#edf1f8,#303b50);color:inherit}.btn:focus-visible,.mission-btn:focus-visible,input:focus-visible{outline:3px solid #efaa37;outline-offset:3px}.quiz{padding:20px}.quiz h3{margin:0 0 8px}.quiz p{font-size:14px;line-height:1.55;color:light-dark(#526079,#bac5da)}.answers{display:grid;gap:8px;margin:14px 0}.answer{padding:12px;text-align:left;border:1px solid light-dark(#dce4f1,#3a465c);background:transparent;color:inherit;border-radius:10px;font:inherit;font-size:14px;cursor:pointer}.answer:hover{border-color:var(--site-primary)}.answer.correct{background:#d9f8e8;border-color:#2fa76a;color:#145f3c}.answer.wrong{background:#fff0e8;border-color:#d57a47;color:#813d17}.quiz-feedback{font-size:13px;min-height:20px;line-height:1.5}.footer{text-align:center;font-size:12px;color:light-dark(#7b879b,#98a7c1);padding-top:22px}
+
+.editor-card{background:#101827;color:#e5edff;border:1px solid #2b3a55;border-radius:calc(18px * var(--site-radius-scale));padding:20px;min-width:0}.editor-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.editor-card h3{margin:0;font-size:17px}.editor-card .sub{color:#a8b7d2}.editor-toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.code-editor{display:block;width:100%;min-height:260px;resize:vertical;background:#0a1020;color:#d7e4ff;border:1px solid #34445f;border-radius:12px;padding:16px;font:14px/1.7 ui-monospace,SFMono-Regular,Consolas,monospace;tab-size:4;white-space:pre;overflow:auto;outline:none}.code-editor:focus{border-color:#8daeff;box-shadow:0 0 0 3px #5279dc33}.console{background:#080d17;border:1px solid #2a3850;border-radius:12px;padding:12px 14px;margin-top:12px;font:13px/1.6 ui-monospace,SFMono-Regular,Consolas,monospace;white-space:pre-wrap;min-height:60px;color:#b7c9e8;overflow-wrap:anywhere}.console .ok{color:#72e0a6}.console .err{color:#ffab8a}.code-help{font-size:12px;line-height:1.6;color:#a8b7d2;margin-top:12px}.editor-layout{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(250px,.8fr);gap:18px}.editor-side{display:grid;align-content:start;gap:12px}.variable-chip{display:inline-block;padding:4px 7px;margin:2px;border-radius:6px;background:#263550;color:#d6e3ff;font:12px ui-monospace,monospace}.editor-card .btn.secondary{background:#263550;color:#e5edff}.editor-card .btn.primary{background:#6d91ff;color:#101827}
+
+.robot-scene[hidden]{display:none}.robot-scene{overflow:hidden}.robot-scene canvas{display:block;width:100%;height:auto;max-height:420px;background:#edf3fb;border:1px solid #d6e0ef;border-radius:14px;margin-top:12px}.robot-controls{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:14px}.robot-controls>div{padding:12px 14px;background:light-dark(#f2f6fc,#222d42);border-radius:11px}.robot-controls label{display:block;font-size:13px;font-weight:700}.robot-controls small{display:block;color:light-dark(#66738c,#a4b2ce);font-size:11px;line-height:1.4}@media(max-width:520px){.robot-controls{grid-template-columns:1fr}}.robot-readouts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:12px}.robot-readouts>div{padding:12px;background:light-dark(#f2f6fc,#222d42);border-radius:11px}.readout-label{display:block;font-size:12px;color:light-dark(#66738c,#a4b2ce);margin-bottom:5px}.robot-readouts strong{font-size:18px;font-variant-numeric:tabular-nums}@media(max-width:520px){.robot-readouts{grid-template-columns:1fr}.robot-scene .btnrow .btn{flex:1}}
+
+@media(max-width:800px){.editor-layout{grid-template-columns:1fr}}
+
+@media(max-width:800px){.layout{grid-template-columns:1fr}.panel{padding:14px}.mission-list{grid-template-columns:repeat(2,minmax(0,1fr))}.side-note{display:none}.sim-grid,.bottom-row{grid-template-columns:1fr}.hero h1{font-size:35px}.mission{padding:19px}}
+@media(max-width:460px){.mission-list{grid-template-columns:1fr 1fr}.mission-btn{padding:9px 7px;gap:7px}.mission-btn small{font-size:11px}.mission-btn .num{min-width:28px;height:28px}.mission-btn strong{font-size:12px}main{padding:16px 12px 35px}.hero{margin-top:22px}.hero h1{font-size:32px}}
+</style>
+</head>
+<body><div id="app">
+<header><div class="topline"><div class="brand">LABO · PROGRAMMATION EMBARQUÉE</div><div class="progress-pill" id="progress">0 / 5 défis réussis</div></div><div class="hero"><h1>Fais parler les<br>capteurs et actionneurs.</h1><p>Un mini-laboratoire interactif pour apprendre la programmation embarquée. Modifie les capteurs, observe le système réagir et réussis les défis un par un.</p></div></header>
+<main><div class="layout"><aside class="panel"><div class="section-label">Parcours d'entraînement</div><div class="mission-list" id="missionList"></div><div class="side-note"><strong>Le principe</strong><br>Un capteur mesure quelque chose. Le programme analyse la mesure. Un actionneur agit sur le monde réel : lumière, moteur, alarme…</div></aside>
+<div class="maincol"><section class="mission"><div class="eyebrow"><span id="missionIcon">◈</span><span id="missionMeta">DÉFI 1 · DÉCOUVERTE</span></div><h2 id="missionTitle">La serre automatique</h2><p id="missionIntro"></p><div class="goal"><strong>🎯 Ta mission</strong><span id="missionGoal"></span></div></section>
+<div class="sim-grid"><section class="sim-card"><h3>1. Le capteur</h3><p class="sub" id="sensorSubtitle">Modifie la mesure comme si tu changeais les conditions autour du système.</p><div class="range-row"><label id="sensorLabel" for="sensorRange">Température</label><span id="sensorScale">0–50 °C</span></div><input id="sensorRange" class="range" type="range" min="0" max="50" value="20" step="1"><div class="sensor-value"><strong id="sensorValue">20</strong><span id="sensorUnit">°C</span></div><div class="ticks"><span id="minTick">0</span><span id="midTick">25</span><span id="maxTick">50</span></div><div class="sensor-desc" id="sensorDescription">Le capteur transmet une valeur au programme.</div></section>
+<section class="sim-card"><h3>2. Les actionneurs</h3><p class="sub">Le programme décide automatiquement quoi activer.</p><div class="actuators" id="actuators"></div></section></div>
+<section class="sim-card robot-scene" id="robotScene" hidden>
+  <div class="editor-head"><div><h3>🤖 Simulation du robot en 2D</h3><p class="sub">Le robot avance selon ton programme. Le capteur ultrason mesure automatiquement la distance jusqu’au mur.</p></div><span class="progress-pill" style="color:var(--site-on-background);border-color:#ccd6e8" id="robotMotionStatus">Prêt</span></div>
+  <canvas id="robotCanvas" width="760" height="340" aria-label="Vue de dessus en 2D du robot mobile, de son angle et de ses obstacles"></canvas>
+  <div class="robot-controls">
+    <div><label for="robotSpeed">Vitesse du robot : <strong><span id="robotSpeedValue">45</span>%</strong></label><input id="robotSpeed" class="range" type="range" min="0" max="100" value="45" step="5"><small>0 % = arrêt · 100 % = vitesse maximale</small></div>
+    <div><label for="robotAngle">Angle du robot : <strong><span id="robotAngleValue">0</span>°</strong></label><input id="robotAngle" class="range" type="range" min="0" max="359" value="0" step="5"><small>0° = droite · 90° = bas · 180° = gauche · 270° = haut</small></div>
+  </div>
+  <div class="robot-readouts"><div><span class="readout-label">Distance mesurée</span><strong><span id="liveDistance">130</span> cm</strong></div><div><span class="readout-label">Moteurs</span><strong id="motorReadout">ARRÊT</strong></div><div><span class="readout-label">Position</span><strong id="positionReadout">Départ</strong></div></div>
+  <div class="robot-readouts" aria-live="polite"><div><span class="readout-label">Variable Python <code>angle</code></span><strong><span id="angleVariableValue">0</span>°</strong></div><div><span class="readout-label">Variable Python <code>vitesse</code></span><strong><span id="speedVariableValue">45</span>%</strong></div><div><span class="readout-label">Lien avec le robot</span><strong>Valeurs synchronisées</strong></div></div>
+  <div class="btnrow"><button class="btn primary" id="startRobot">▶ Démarrer le robot</button><button class="btn secondary" id="pauseRobot">Ⅱ Pause</button><button class="btn secondary" id="resetRobot">↺ Replacer au départ</button></div>
+  <p class="code-help" style="color:light-dark(#66738c,#a8b7d2);margin-bottom:0">Vue du dessus : le curseur d’angle change la direction du robot, et le curseur de vitesse règle sa rapidité. Modifie le seuil dans le code, clique sur Exécuter puis démarre le robot.</p>
+</section>
+<section class="editor-card"><div class="editor-head"><div><div class="eyebrow" style="color:#9bb7ff">⌨ ÉDITEUR PYTHON</div><h3 style="margin-top:7px">5. Écris ton programme</h3></div><span class="progress-pill">Mode simulation</span></div><p class="sub">Modifie le code, clique sur « Exécuter » et observe les actionneurs. Le programme est relancé quand tu changes la valeur du capteur.</p><div class="editor-layout"><div><textarea id="pythonCode" class="code-editor" spellcheck="false" aria-label="Éditeur de code Python"></textarea><div class="editor-toolbar"><button class="btn primary" id="runCode">▶ Exécuter le programme</button><button class="btn secondary" id="starterCode">↺ Restaurer le code</button></div><div class="console" id="consoleOutput" aria-live="polite">Console prête. Lance ton programme.</div></div><div class="editor-side"><div><strong>Variables disponibles</strong><p class="code-help">La variable <span class="variable-chip">capteur</span> contient la mesure du capteur. Dans les défis du robot, tu peux écrire <code>angle = 90</code> ou <code>vitesse = 50</code> dans le programme : le robot et les affichages prennent alors ces valeurs. Les curseurs restent utilisables si tu ne fixes pas ces variables dans le code.</p></div><div><strong>Actionneurs à commander</strong><p class="code-help" id="actuatorHelp"></p></div><div><strong>Python accepté dans ce simulateur</strong><p class="code-help">Tu peux utiliser les variables, les nombres, <code>True</code>, <code>False</code>, <code>if</code>, <code>else</code>, les calculs simples (<code>+</code>, <code>-</code>), les comparaisons (<code>&gt;</code>, <code>&lt;</code>, <code>==</code>) et <code>print()</code>. Exemple : <code>angle = angle + 1</code>. Respecte l'indentation de 4 espaces. Ce simulateur comprend un petit sous-ensemble de Python, pas toutes les fonctionnalités du langage.</p></div></div></div></section>
+<div class="bottom-row"><section class="sim-card"><h3>3. La logique du programme</h3><p class="sub">Voici la règle que ton système applique.</p><div class="rulebox" id="ruleCode"></div><div class="btnrow"><button class="btn secondary" id="resetBtn">↺ Réinitialiser</button><button class="btn primary" id="nextBtn">Défi suivant →</button></div></section>
+<section class="sim-card quiz"><h3>4. Valide ton défi</h3><p id="questionText"></p><div class="answers" id="answers"></div><div class="quiz-feedback" id="quizFeedback" aria-live="polite"></div></section></div>
+<div class="footer">Simulation pédagogique : les capteurs et actionneurs sont virtuels. Aucun matériel physique n'est commandé.</div></div></div></main></div>
+<script>
+const missions=[
+ {title:'La serre automatique',icon:'🌱',meta:'DÉFI 1 · DÉCOUVERTE',intro:'Une petite serre doit garder une température confortable. Tu peux changer la température mesurée par le capteur et regarder ce que décide le programme.',goal:'Si la température dépasse 28 °C, le ventilateur doit se mettre en marche. Sinon, il reste arrêté.',sensor:'Température',unit:'°C',min:0,max:50,start:20,desc:v=>`Le capteur de température mesure ${v} °C.`,act:[['🌀','Ventilateur',v=>v>28,'Se déclenche au-dessus de 28 °C'],['💡','Voyant de contrôle',v=>v>28,'Signale une température trop élevée']],rule:'SI température > 28 :\n    ventilateur = MARCHE\nSINON :\n    ventilateur = ARRÊT',question:'La température est réglée sur 35 °C. Que doit faire le ventilateur ?',answers:['Rester arrêté','Se mettre en marche','Faire clignoter le voyant uniquement'],correct:1,explain:'35 est supérieur à 28 : la condition est vraie, le ventilateur se met en marche.'},
+ {title:'Le couloir éclairé',icon:'💡',meta:'DÉFI 2 · CONDITION',intro:'Un éclairage automatique doit s’allumer lorsqu’il fait sombre. Le capteur mesure la luminosité ambiante.',goal:'Quand la luminosité est inférieure à 35 %, la lampe s’allume.',sensor:'Luminosité',unit:'%',min:0,max:100,start:20,desc:v=>`Le capteur mesure une luminosité de ${v} %. 0 % = très sombre, 100 % = très lumineux.`,act:[['💡','Lampe',v=>v<35,'S’allume quand il fait sombre'],['🔔','Alerte',v=>v<15,'Alerte si le couloir est presque noir']],rule:'SI luminosité < 35 :\n    lampe = MARCHE\nSINON :\n    lampe = ARRÊT',question:'La luminosité vaut 80 %. Quel est l’état de la lampe ?',answers:['Allumée','Éteinte','Le capteur ne fonctionne pas'],correct:1,explain:'80 est supérieur à 35 : il fait suffisamment clair, la lampe reste éteinte.'},
+ {title:'Le réservoir malin',icon:'💧',meta:'DÉFI 3 · SEUIL',intro:'Un réservoir surveille son niveau d’eau. Une pompe doit remplir le réservoir quand le niveau est trop bas.',goal:'Si le niveau d’eau est inférieur à 25 %, la pompe démarre.',sensor:'Niveau d’eau',unit:'%',min:0,max:100,start:15,desc:v=>`Le réservoir est rempli à ${v} %. Le capteur envoie ce pourcentage au programme.`,act:[['🚰','Pompe de remplissage',v=>v<25,'Remplit si le niveau est bas'],['🚨','Voyant de niveau bas',v=>v<10,'Alerte si le réservoir est presque vide']],rule:'SI niveau < 25 :\n    pompe = MARCHE\nSINON :\n    pompe = ARRÊT',question:'Le réservoir est rempli à 18 %. Que décide le programme ?',answers:['Démarrer la pompe','Arrêter la pompe','Allumer uniquement le voyant'],correct:0,explain:'18 est inférieur à 25 : le programme démarre la pompe pour remplir le réservoir.'},
+ {title:'Le robot mobile approche du mur',icon:'🤖',meta:'DÉFI 4 · ROBOT MOBILE',intro:'Le robot démarre à distance du mur et avance réellement dans la simulation 2D. À chaque instant, son capteur ultrason mesure la distance restante. Ton programme doit couper les moteurs avant la collision.',goal:'Fais avancer le robot, puis arrête-le quand la distance devient inférieure à 20 cm. La distance affichée est calculée à partir de sa position.',sensor:'Distance au mur',unit:'cm',min:0,max:150,start:130,desc:v=>`Le capteur ultrason mesure ${v} cm entre le robot et le mur. Cette valeur évolue quand le robot se déplace.`,act:[['⚙️','Moteurs avant',v=>v>=20,'Font avancer le robot si la voie est libre'],['🔊','Buzzer',v=>v<20,'Avertit quand le mur est trop proche']],rule:'SI distance < 20 :\n    moteurs = False\n    buzzer = True\nSINON :\n    moteurs = True\n    buzzer = False',question:'Le robot mesure 15 cm jusqu’au mur. Quelle action évite la collision ?',answers:['Garder les moteurs activés','Arrêter les moteurs et activer le buzzer','Ignorer la mesure'],correct:1,explain:'À 15 cm, la distance est inférieure à 20 cm : les moteurs doivent s’arrêter et le buzzer s’activer.'} ,
+ {title:'Le robot évite l’obstacle',icon:'🛞',meta:'DÉFI 5 · ÉVITEMENT',intro:'Vue du dessus : règle la vitesse et l’angle du robot avec les curseurs. Il avance dans la direction indiquée par son nez, mesure la distance dans cette direction et doit éviter le mur.',goal:'Modifie la vitesse et l’angle, puis programme les moteurs pour avancer quand la distance est supérieure ou égale à 25 cm et reculer si elle est inférieure. Observe comment l’angle change la trajectoire et la mesure du capteur.',sensor:'Distance au mur',unit:'cm',min:0,max:150,start:130,desc:v=>`Distance mesurée en direct : ${v} cm. Le robot peut avancer ou reculer selon ton code.`,act:[['⬆️','Moteurs avant',v=>v>=25,'Déplacent le robot vers le mur'],['⬅️','Moteurs arrière',v=>v<25,'Font reculer le robot pour s’éloigner'],['🔊','Buzzer',v=>v<25,'Signale un obstacle proche']],rule:'SI distance < 25 :\n    moteurs = False\n    marche_arriere = True\n    buzzer = True\nSINON :\n    moteurs = True\n    marche_arriere = False\n    buzzer = False',question:'La distance descend à 18 cm. Que doit faire le robot pour s’éloigner du mur ?',answers:['Avancer encore','Reculer et signaler l’obstacle','Arrêter définitivement le programme'],correct:1,explain:'À moins de 25 cm, le programme commande la marche arrière et active le buzzer.'}
+ ];
+const actuatorVars = [["ventilateur","voyant"],["lampe","alerte"],["pompe","voyant"],["moteurs","buzzer"],["moteurs","marche_arriere","buzzer"]];
+const starterCodes = [
+`# La mesure du capteur est dans la variable capteur
+temperature = capteur
+
+if temperature > 28:
+    ventilateur = True
+    voyant = True
+else:
+    ventilateur = False
+    voyant = False
+
+print("Température mesurée :", temperature)`,
+`luminosite = capteur
+
+if luminosite < 35:
+    lampe = True
+else:
+    lampe = False
+
+if luminosite < 15:
+    alerte = True
+else:
+    alerte = False
+
+print("Luminosité :", luminosite)`,
+`niveau = capteur
+
+if niveau < 25:
+    pompe = True
+else:
+    pompe = False
+
+if niveau < 10:
+    voyant = True
+else:
+    voyant = False
+
+print("Niveau d'eau :", niveau)`,
+`# Variables du robot disponibles : angle (degrés) et vitesse (pourcentage)
+# Elles suivent les curseurs de la simulation.
+distance = capteur
+
+if distance < 20:
+    moteurs = False
+    buzzer = True
+else:
+    moteurs = True
+    buzzer = False
+
+print("Distance au mur :", distance, "cm")
+print("Angle :", angle, "degres")
+print("Vitesse :", vitesse, "%")`,
+`# Variables du robot disponibles : angle (degrés) et vitesse (pourcentage)
+# Elles suivent les curseurs de la simulation.
+# Le robot avance si le mur est loin et recule s'il est proche
+distance = capteur
+
+if distance < 25:
+    moteurs = False
+    marche_arriere = True
+    buzzer = True
+else:
+    moteurs = True
+    marche_arriere = False
+    buzzer = False
+
+print("Distance au mur :", distance, "cm")
+print("Angle :", angle, "degres")
+print("Vitesse :", vitesse, "%")`
+];
+let current=0;const completed=new Set();let answered=false;
+let robotX=125, robotY=170, robotAngle=0, robotRunning=false, robotTimer=null, robotLastResult=null;
+const ROBOT_R=17, ROOM={left:24,right:736,top:24,bottom:316}, WALL={x:650,y1:55,y2:285};
+function rayDistance(){
+ const a=robotAngle*Math.PI/180, dx=Math.cos(a),dy=Math.sin(a);let best=Infinity;
+ // Distances to the room boundaries in the direction of the sensor
+ if(dx>0)best=Math.min(best,(ROOM.right-robotX)/dx);if(dx<0)best=Math.min(best,(ROOM.left-robotX)/dx);
+ if(dy>0)best=Math.min(best,(ROOM.bottom-robotY)/dy);if(dy<0)best=Math.min(best,(ROOM.top-robotY)/dy);
+ // The vertical obstacle/wall is a segment, not an infinite line
+ if(dx>0){const t=(WALL.x-robotX)/dx, yy=robotY+t*dy;if(t>0&&yy>=WALL.y1&&yy<=WALL.y2)best=Math.min(best,t);}
+ return Math.max(0,Math.round(best/3.2));
+}
+function robotDistance(){return rayDistance();}
+function drawRobot(){
+ const c=$('robotCanvas');if(!c)return;const ctx=c.getContext('2d'),w=c.width,h=c.height;ctx.clearRect(0,0,w,h);
+ ctx.fillStyle='#edf3fb';ctx.fillRect(0,0,w,h);
+ // top-down arena and grid
+ ctx.fillStyle='#f8fbff';ctx.fillRect(ROOM.left,ROOM.top,ROOM.right-ROOM.left,ROOM.bottom-ROOM.top);
+ ctx.strokeStyle='#dce5f1';ctx.lineWidth=1;for(let x=40;x<ROOM.right;x+=25){ctx.beginPath();ctx.moveTo(x,ROOM.top);ctx.lineTo(x,ROOM.bottom);ctx.stroke()}for(let y=40;y<ROOM.bottom;y+=25){ctx.beginPath();ctx.moveTo(ROOM.left,y);ctx.lineTo(ROOM.right,y);ctx.stroke()}
+ ctx.strokeStyle='#8291a8';ctx.lineWidth=5;ctx.strokeRect(ROOM.left,ROOM.top,ROOM.right-ROOM.left,ROOM.bottom-ROOM.top);
+ // wall / obstacle from a top-down view
+ ctx.fillStyle='#7e8da4';ctx.fillRect(WALL.x,WALL.y1,18,WALL.y2-WALL.y1);ctx.fillStyle='#aab6c7';for(let y=WALL.y1+8;y<WALL.y2;y+=20)ctx.fillRect(WALL.x+3,y,12,3);
+ ctx.fillStyle='#24334b';ctx.font='bold 12px system-ui';ctx.fillText('MUR / OBSTACLE',WALL.x-50,WALL.y1-10);
+ // sensor ray from robot's front, ending at the measured wall/boundary
+ const a=robotAngle*Math.PI/180,dx=Math.cos(a),dy=Math.sin(a),distPx=robotDistance()*3.2;
+ const sx=robotX+Math.cos(a)*ROBOT_R,sy=robotY+Math.sin(a)*ROBOT_R,ex=robotX+dx*distPx,ey=robotY+dy*distPx;
+ ctx.strokeStyle=robotDistance()<25?'#e05a47':'#3875e8';ctx.lineWidth=2;ctx.setLineDash([6,5]);ctx.beginPath();ctx.moveTo(sx,sy);ctx.lineTo(ex,ey);ctx.stroke();ctx.setLineDash([]);
+ ctx.fillStyle='rgba(56,117,232,.14)';ctx.beginPath();ctx.arc(sx,sy,5,0,Math.PI*2);ctx.fill();
+ // robot body rotated to show its heading
+ ctx.save();ctx.translate(robotX,robotY);ctx.rotate(a);ctx.fillStyle='#2457d6';ctx.beginPath();ctx.roundRect(-20,-15,40,30,8);ctx.fill();ctx.fillStyle='#dce8ff';ctx.fillRect(-8,-9,15,7);ctx.fillStyle='#17233b';ctx.beginPath();ctx.arc(12,0,3,0,Math.PI*2);ctx.fill();ctx.fillStyle='#25344d';ctx.fillRect(-15,-19,9,5);ctx.fillRect(6,-19,9,5);ctx.fillRect(-15,14,9,5);ctx.fillRect(6,14,9,5);ctx.restore();
+ ctx.fillStyle='#24334b';ctx.font='bold 12px system-ui';ctx.fillText('ROBOT',robotX-22,robotY-27);
+ ctx.fillStyle=robotDistance()<25?'#c2410c':'#2457d6';ctx.font='bold 15px system-ui';ctx.fillText(`${robotDistance()} cm`,Math.max(ROOM.left+4,Math.min(ex+8,ROOM.right-55)),Math.max(ROOM.top+16,Math.min(ey-8,ROOM.bottom-5)));
+ // heading arrow
+ ctx.strokeStyle='#2457d6';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(robotX,robotY);ctx.lineTo(robotX+Math.cos(a)*30,robotY+Math.sin(a)*30);ctx.stroke();
+}
+function syncRobotVariables(){const a=Number($('robotAngle').value),v=Number($('robotSpeed').value);$('angleVariableValue').textContent=a;$('speedVariableValue').textContent=v;$('robotAngleValue').textContent=a;$('robotSpeedValue').textContent=v;}
+function stopRobot(){robotRunning=false;if(robotTimer){clearInterval(robotTimer);robotTimer=null;}$('robotMotionStatus').textContent='En pause';}
+function applyProgramRobotSettings(env){
+ // Une affectation dans le code, par exemple angle = 90, pilote vraiment le robot.
+ if(Number.isFinite(Number(env.angle))){robotAngle=((Math.round(Number(env.angle))%360)+360)%360;$('robotAngle').value=robotAngle;$('robotAngleValue').textContent=robotAngle;$('angleVariableValue').textContent=robotAngle;}
+ if(Number.isFinite(Number(env.vitesse))){const v=Math.max(0,Math.min(100,Number(env.vitesse)));$('robotSpeed').value=v;$('robotSpeedValue').textContent=v;$('speedVariableValue').textContent=v;}
+}
+function robotTick(){if(current<3)return;let d=robotDistance();$('sensorRange').value=d;$('sensorValue').textContent=d;$('liveDistance').textContent=d;$('sensorDescription').textContent=`Le capteur mesure ${d} cm dans la direction du robot. La mesure change avec sa position et son angle.`;
+ try{let r=executeMiniPython($('pythonCode').value,d,robotAngle,Number($('robotSpeed').value));applyProgramRobotSettings(r.env);robotLastResult=r;const forward=r.env.moteurs===true,backward=r.env.marche_arriere===true;const speed=Number($('robotSpeed').value)/100;const step=speed*3.0*(backward?-1:1);let nx=robotX,ny=robotY;if(robotRunning&&((forward&&!backward)||backward)){const a=robotAngle*Math.PI/180;nx+=Math.cos(a)*step;ny+=Math.sin(a)*step;}
+ // keep robot in arena and stop before the obstacle
+ nx=Math.max(ROOM.left+ROBOT_R,Math.min(ROOM.right-ROBOT_R,nx));ny=Math.max(ROOM.top+ROBOT_R,Math.min(ROOM.bottom-ROBOT_R,ny));if(nx+ROBOT_R>=WALL.x&&ny>=WALL.y1-ROBOT_R&&ny<=WALL.y2+ROBOT_R){nx=robotX;ny=robotY;}
+ robotX=nx;robotY=ny;$('motorReadout').textContent=forward&&!backward?'AVANCE':backward?'RECULE':'ARRÊT';$('positionReadout').textContent=`x ${Math.round(robotX)} · y ${Math.round(robotY)} · ${robotAngle}°`;$('robotMotionStatus').textContent=forward&&!backward?'En mouvement':backward?'Marche arrière':'Arrêté';$('actuators').innerHTML='';missions[current].act.forEach((a,j)=>{const key=actuatorVars[current][j],on=r.env[key]===true;const dEl=document.createElement('div');dEl.className='actuator';dEl.innerHTML=`<div class="act-icon">${a[0]}</div><div class="act-text"><strong>${a[1]}</strong><small>${a[3]}</small></div><span class="status ${on?'on':''}"><span class="lamp ${on?'on':''}"></span> ${on?'ACTIF':'ARRÊT'}</span>`;$('actuators').appendChild(dEl)});$('ruleCode').textContent='Variables calculées par ton programme :\n'+Object.keys(r.env).filter(k=>k!=='True'&&k!=='False').map(k=>k+' = '+r.env[k]).join('\n');$('consoleOutput').innerHTML='<span class="ok">✓ Programme exécuté sans erreur.</span>\n'+r.output.map(x=>escapeHtml(x)).join('\n');}catch(e){stopRobot();$('consoleOutput').innerHTML='<span class="err">✖ Erreur Python simulée : '+escapeHtml(e.message)+'</span>';}
+ $('sensorRange').value=robotDistance();$('robotAngleValue').textContent=robotAngle;$('liveDistance').textContent=robotDistance();syncRobotVariables();drawRobot();}
+function startRobot(){if(current<3)return;robotRunning=true;$('robotMotionStatus').textContent='En mouvement';if(robotTimer)clearInterval(robotTimer);robotTimer=setInterval(()=>{if(robotRunning)robotTick()},80);robotTick();}
+function resetRobot(){stopRobot();robotX=125;robotY=170;robotAngle=0;$('robotAngle').value=0;$('robotAngleValue').textContent='0';$('robotSpeed').value=45;$('robotSpeedValue').textContent='45';robotTick();$('robotMotionStatus').textContent='Au départ';}
+
+const $=id=>document.getElementById(id);
+function renderList(){ $('missionList').innerHTML=''; missions.forEach((m,i)=>{const b=document.createElement('button');b.className='mission-btn'+(i===current?' active':'');b.innerHTML=`<span class="num">${completed.has(i)?'✓':String(i+1).padStart(2,'0')}</span><span><strong>${m.title}</strong><small>${completed.has(i)?'Défi réussi':`Défi ${i+1}`}</small></span>`;b.onclick=()=>loadMission(i);$('missionList').appendChild(b)});$('progress').textContent=`${completed.size} / ${missions.length} défis réussis`;}
+function loadMission(i){if(i!==current)stopRobot();current=i;answered=false;const m=missions[i];$('robotScene').hidden=i<3;if(i>=3){robotX=125;robotY=170;robotAngle=0;$('robotAngle').value=0;$('robotAngleValue').textContent='0';robotRunning=false;$('sensorRange').style.display='none';document.querySelector('.ticks').style.display='none';$('sensorScale').textContent='Mesure en direct';}else{$('sensorRange').style.display='block';document.querySelector('.ticks').style.display='flex';}drawRobot();$('missionIcon').textContent=m.icon;$('missionMeta').textContent=m.meta;$('missionTitle').textContent=m.title;$('missionIntro').textContent=m.intro;$('missionGoal').textContent=m.goal;$('sensorLabel').textContent=m.sensor;$('sensorUnit').textContent=m.unit;$('sensorRange').min=m.min;$('sensorRange').max=m.max;$('sensorRange').value=m.start;$('sensorScale').textContent=`${m.min}–${m.max}${m.unit?' '+m.unit:''}`;$('minTick').textContent=m.min;$('midTick').textContent=(m.min+m.max)/2;$('maxTick').textContent=m.max;$('questionText').textContent=m.question;$('quizFeedback').textContent='';$('nextBtn').textContent=i===missions.length-1?'Voir le bilan →':'Défi suivant →';$('answers').innerHTML='';$('pythonCode').value=starterCodes[i];$('consoleOutput').textContent='Code chargé. Clique sur « Exécuter le programme ».';$('actuatorHelp').innerHTML=m.act.map(a=>`<span class="variable-chip">${a[1].normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'_').replace(/^_|_$/g,'')}</span>`).join(' ');m.answers.forEach((a,j)=>{const b=document.createElement('button');b.className='answer';b.textContent=String.fromCharCode(65+j)+'. '+a;b.onclick=()=>checkAnswer(j,b);$('answers').appendChild(b)});renderList();updateSensor();}
+function evalCondition(expr, env){
+ expr=expr.trim().replace(/\bTrue\b/g,'true').replace(/\bFalse\b/g,'false');
+ const m=expr.match(/^([A-Za-z_][A-Za-z0-9_]*)\s*(==|!=|>=|<=|>|<)\s*(-?\d+(?:\.\d+)?|true|false|[A-Za-z_][A-Za-z0-9_]*)$/);
+ if(!m) throw new Error('Condition non reconnue : '+expr);
+ const left=env[m[1]]; let right=/^-?\d/.test(m[3])?Number(m[3]):(m[3]==='true'?true:m[3]==='false'?false:env[m[3]]);
+ if(left===undefined||right===undefined) throw new Error('Variable inconnue dans : '+expr);
+ switch(m[2]){case '==':return left===right||String(left)===String(right);case '!=':return left!==right&&String(left)!==String(right);case '>':return Number(left)>Number(right);case '<':return Number(left)<Number(right);case '>=':return Number(left)>=Number(right);case '<=':return Number(left)<=Number(right)}
+}
+function executeMiniPython(source, sensor, angleValue=Number($('robotAngle')?.value||0), speedValue=Number($('robotSpeed')?.value||45)){
+ const lines=source.split(/\r?\n/);const env={capteur:sensor,angle:angleValue,vitesse:speedValue,True:true,False:false};const output=[];let pc=0,steps=0;
+ function block(indent){while(pc<lines.length){if(++steps>500)throw new Error('Trop d’instructions.');let raw=lines[pc];if(!raw.trim()||raw.trim().startsWith('#')){pc++;continue}let spaces=raw.match(/^ */)[0].length;if(spaces<indent)return;if(spaces>indent)throw new Error('Indentation inattendue ligne '+(pc+1)+'.');let line=raw.trim();
+ if(line.startsWith('if ')&&line.endsWith(':')){const cond=evalCondition(line.slice(3,-1),env);pc++;const thenIndent=pc<lines.length?(lines[pc].match(/^ */)[0].length):indent+4;if(thenIndent<=indent)throw new Error('Ajoute 4 espaces dans le bloc if (ligne '+pc+').');if(cond)block(thenIndent);else skipBlock(thenIndent);if(pc<lines.length&&lines[pc].trim()==='else:'){pc++;const ei=pc<lines.length?(lines[pc].match(/^ */)[0].length):indent+4;if(ei<=indent)throw new Error('Ajoute 4 espaces dans le bloc else.');if(cond)skipBlock(ei);else block(ei)}continue;}
+ if(line==='else:')return;
+ const printMatch=line.match(/^print\((.*)\)$/);if(printMatch){const args=printMatch[1].split(/,(?=(?:[^"']|"[^"]*"|'[^']*')*$)/).map(x=>x.trim()).filter(Boolean);output.push(args.map(a=>{if((a.startsWith('"')&&a.endsWith('"'))||(a.startsWith("'")&&a.endsWith("'")))return a.slice(1,-1);if(Object.prototype.hasOwnProperty.call(env,a))return String(env[a]);if(/^-?\d+(\.\d+)?$/.test(a))return a;throw new Error('Valeur inconnue dans print() : '+a)}).join(' '));pc++;continue;}
+ const assign=line.match(/^([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.+)$/);if(assign){const name=assign[1],expr=assign[2].trim();let val;if(expr==='True'||expr==='true')val=true;else if(expr==='False'||expr==='false')val=false;else if(/^-?\d+(?:\.\d+)?$/.test(expr))val=Number(expr);else if(Object.prototype.hasOwnProperty.call(env,expr))val=env[expr];else {const arithmetic=expr.match(/^([A-Za-z_][A-Za-z0-9_]*|-?\d+(?:\.\d+)?)\s*([+\-])\s*([A-Za-z_][A-Za-z0-9_]*|-?\d+(?:\.\d+)?)$/);if(!arithmetic)throw new Error('Expression non reconnue : '+expr+'. Utilise par exemple angle = angle + 1.');const operand=t=>{if(/^-?\d+(?:\.\d+)?$/.test(t))return Number(t);if(Object.prototype.hasOwnProperty.call(env,t))return env[t];throw new Error('Variable inconnue : '+t)};const left=operand(arithmetic[1]),right=operand(arithmetic[3]);if(typeof left!=='number'||typeof right!=='number')throw new Error('Les calculs + et - nécessitent des nombres.');val=arithmetic[2]==='+'?left+right:left-right;}env[name]=val;pc++;continue;}
+ throw new Error('Instruction non reconnue ligne '+(pc+1)+' : '+line+'\nEssaie une affectation, if/else ou print().');
+ }}
+ function skipBlock(indent){while(pc<lines.length){const raw=lines[pc];if(!raw.trim()||raw.trim().startsWith('#')){pc++;continue}const sp=raw.match(/^ */)[0].length;if(sp<indent)return;pc++;}}
+ block(0);return {env,output};
+}
+function updateSensor(){syncRobotVariables();const m=missions[current],v=current>=3?robotDistance():Number($('sensorRange').value);$('sensorValue').textContent=v;if(current>=3){$('liveDistance').textContent=v;drawRobot();}$('sensorDescription').textContent=m.desc(v);try{const result=executeMiniPython($('pythonCode').value,v,robotAngle,Number($('robotSpeed').value));$('actuators').innerHTML='';m.act.forEach(a=>{const key=actuatorVars[current][m.act.indexOf(a)];const on=result.env[key]===true;const d=document.createElement('div');d.className='actuator';d.innerHTML=`<div class="act-icon">${a[0]}</div><div class="act-text"><strong>${a[1]}</strong><small>${a[3]}</small></div><span class="status ${on?'on':''}"><span class="lamp ${on?'on':''}"></span> ${on?'ACTIF':'ARRÊT'}</span>`;$('actuators').appendChild(d)});$('ruleCode').textContent='Variables calculées par ton programme :\n'+Object.keys(result.env).filter(k=>k!=='True'&&k!=='False').map(k=>k+' = '+result.env[k]).join('\n');$('consoleOutput').innerHTML='<span class="ok">✓ Programme exécuté sans erreur.</span>'+(result.output.length?'\n'+result.output.map(x=>escapeHtml(x)).join('\n'):'\n(Aucun message : ajoute un print() pour afficher une information.)');}catch(e){$('consoleOutput').innerHTML='<span class="err">✖ Erreur Python simulée : '+escapeHtml(e.message)+'</span>';$('actuators').innerHTML='<div class="sensor-desc">Corrige le programme puis relance-le. Les actionneurs attendent un code valide.</div>';}}
+function escapeHtml(str){return String(str).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+
+function checkAnswer(j,btn){if(answered)return;answered=true;const m=missions[current];const buttons=[...$('answers').querySelectorAll('button')];buttons.forEach((b,k)=>{b.disabled=true;if(k===m.correct)b.classList.add('correct')});if(j===m.correct){completed.add(current);$('quizFeedback').textContent='✓ Exact ! '+m.explain;$('quizFeedback').style.color='#23965d';}else{btn.classList.add('wrong');$('quizFeedback').textContent='Pas tout à fait. '+m.explain;$('quizFeedback').style.color='#bd672c'}renderList();}
+$('sensorRange').addEventListener('input',updateSensor);$('robotSpeed').addEventListener('input',()=>{syncRobotVariables();if(current>=3){updateSensor();if(robotRunning)robotTick();else drawRobot();}});$('robotAngle').addEventListener('input',()=>{robotAngle=Number($('robotAngle').value);syncRobotVariables();if(current>=3){updateSensor();if(robotRunning)robotTick();else drawRobot();}});$('runCode').addEventListener('click',()=>{updateSensor();if(current>=3)robotTick();});$('startRobot').addEventListener('click',startRobot);$('pauseRobot').addEventListener('click',stopRobot);$('resetRobot').addEventListener('click',resetRobot);$('starterCode').addEventListener('click',()=>{ $('pythonCode').value=starterCodes[current]; updateSensor(); });$('pythonCode').addEventListener('keydown',e=>{if(e.key==='Tab'){e.preventDefault();const a=e.target;const start=a.selectionStart,end=a.selectionEnd;a.setRangeText('    ',start,end,'end');}});$('resetBtn').addEventListener('click',()=>loadMission(current));$('nextBtn').addEventListener('click',()=>{if(current<missions.length-1){loadMission(current+1)}else{if(completed.size===missions.length){$('missionTitle').textContent='Mission accomplie !';$('missionIntro').textContent='Bravo : tu as réussi tous les défis. Tu sais maintenant relier une mesure de capteur à une action du programme.';$('missionGoal').textContent='Tu peux recommencer les missions et modifier les mesures pour observer d’autres comportements.';$('questionText').textContent='Bilan : capteur → programme → actionneur.';$('answers').innerHTML='';$('quizFeedback').textContent='Tous les défis sont validés !';}else{$('quizFeedback').textContent=`Il te reste ${missions.length-completed.size} défi(s) à valider. Tu peux revenir sur les missions dans la liste.`;$('quizFeedback').style.color='';}}});syncRobotVariables();loadMission(0);
+</script></body></html>
